@@ -2,14 +2,27 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MemberService {
+//@Service // 넣어 주면 Spring이 올라올때 Service를 인식해서, 비즈니스 로직 생성
+public class MemberService { // 순수 자바 Class
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+//    @Autowired // 비권장
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+
+    @Autowired // Spring이 뜰때 생성자를 호출 해준다. // Spring Container에 올라가는 값들만 동작하게 한다.
+    public MemberService(MemberRepository memberRepository) { // 외부에서 사용할 수 있게 바꾸어 준다. // DI = Dependency Injection
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원 가입

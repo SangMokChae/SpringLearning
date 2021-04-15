@@ -1,9 +1,11 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+//@Repository // Spring이 인식해줌
 public class MemoryMemberRepository implements MemberRepository  {
 
     private static Map<Long, Member> store = new HashMap<>();  // 실무에서는 동시속 문제때문에 컨커런텐시브(?)를 사용해야 한다.
