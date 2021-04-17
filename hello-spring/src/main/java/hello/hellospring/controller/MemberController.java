@@ -1,8 +1,14 @@
 package hello.hellospring.controller;
 
+import hello.hellospring.domain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller // Component 스캔(연결을 위한 내장됨)
 public class MemberController {
@@ -21,5 +27,27 @@ public class MemberController {
         this.memberService = memberService;
 //        memberService.setMemberRepository();
 //      이러한 방식을 사용하면 public방식으로 누구나 오픈이 가능해진다. // 개발에서 호출하지 않아야될 메소드는 호출되지 않게 해야된다.
+    }
+
+    @GetMapping("/members/new")
+    public String createForm() { // templates에서 찾는다.
+        return "members/createMemberForm";
+    }
+
+    @PostMapping("/members/new")
+    public String create(MemberForm form) {
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        return "redirect:/"; //redirect를 글자로 형식화
+    }
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
     }
 }

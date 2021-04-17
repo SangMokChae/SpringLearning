@@ -19,7 +19,7 @@ public class MemberService { // 순수 자바 Class
 //        this.memberRepository = memberRepository;
 //    }
 
-    @Autowired // Spring이 뜰때 생성자를 호출 해준다. // Spring Container에 올라가는 값들만 동작하게 한다.
+    @Autowired // Spring이 뜰때 생성자를 호출 해준다. // Spring Container에 올라가는 값들만 동작하게 한다. // Bean이 등록된 것에만 작동한다.
     public MemberService(MemberRepository memberRepository) { // 외부에서 사용할 수 있게 바꾸어 준다. // DI = Dependency Injection
         this.memberRepository = memberRepository;
     }

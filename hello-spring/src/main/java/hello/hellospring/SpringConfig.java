@@ -14,7 +14,7 @@ public class SpringConfig {
         return new MemberService(memberRepository());
     }
 
-    @Bean
+    @Bean  // 상황에 따라 구현클래스 DB연결시에 이것만 바꾸어 주면 된다.
     public MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
