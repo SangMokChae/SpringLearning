@@ -1,0 +1,2 @@
+hello/core/CoreApplicationTests.java
+ hello.core.CoreApplicationTests
