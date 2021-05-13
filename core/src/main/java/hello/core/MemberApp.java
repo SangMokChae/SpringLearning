@@ -9,12 +9,14 @@ public class MemberApp {
 
     public static void main(String[] args) {
 
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig(); // AppConfig를 생성해준다.
+        MemberService memberService = appConfig.memberService(); // AppConfig로 부터 memberService를 받아온다.
+        // memberService에서 생성자로 MemoryMemberRepository를 생성해준다.
         Member member = new Member(1L, "memberA", Grade.VIP); // 1L은 Long type
         memberService.join(member);
 
         Member findMember = memberService.findMember(1L);
-        System.out.println("New Member = " +member);
-        System.out.println("findMember = " +findMember);
+        System.out.println("New Member = " +member.getName());
+        System.out.println("find Member = " +findMember.getName());
     }
 }
